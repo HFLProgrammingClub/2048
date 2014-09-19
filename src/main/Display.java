@@ -6,7 +6,7 @@ import view.Blueprints;
 import view.Structure;
 import view.View;
 
-public class display {
+public class Display {
 	View view = new View();
 	display(){
 		
