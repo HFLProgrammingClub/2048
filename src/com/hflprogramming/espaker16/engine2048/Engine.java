@@ -9,7 +9,7 @@ public class Engine {
 	static final int d_left = 4;
 	static final int d_right = 2;
 
-	public static int score;
+	public int score;
 
 	private int[][] gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 
@@ -182,11 +182,11 @@ public class Engine {
 
 	// 'newTileValue' is supposed to be set to the numerical value of the new tile created.
 	public void setScore(int newTileValue) {
-		Engine.score += newTileValue;
+		this.score += newTileValue;
 	}
 
 	public int getScore() {
-		return Engine.score;
+		return this.score;
 	}
 
 }
