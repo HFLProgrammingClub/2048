@@ -9,11 +9,11 @@ import view.View;
 public class Display {
 	Board board = new Board();
 	View view = new View();
-	Structure board = new Structure();
+	Structure board_structure = new Structure();
 	Structure screen = new Structure();
 
-	display() {
-
+	Display() {
+		// TODO: add constructor functionality.
 	}
 }
 
@@ -39,6 +39,6 @@ class Board extends Blueprints {
 
 	@Override
 	public void draw(Structure structure) {
-
+		// TODO: add draw() functionality
 	}
 }

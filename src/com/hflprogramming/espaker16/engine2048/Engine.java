@@ -9,6 +9,8 @@ public class Engine {
 	static final int d_left = 4;
 	static final int d_right = 2;
 
+	public static int score;
+
 	private int[][] gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 
 	public int[][] look() {
@@ -84,11 +86,11 @@ public class Engine {
 	}
 
 	private void onGameOver() {
-		//nothing yet
+		// TODO: add onGameOver() functionality
 	}
 
 	private void onMove() {
-		//nothing yet
+		// TODO: add onMove() functionality
 	}
 
 	/*
@@ -127,6 +129,8 @@ public class Engine {
 					if (block == nblock && block != 0) {
 						board[row][col] = nblock * 2;
 						board[row][b] = -1;
+
+						setScore(nblock * 2);
 
 						valid = true;
 
@@ -176,13 +180,13 @@ public class Engine {
 		return true;
 	}
 
+	// 'newTileValue' is supposed to be set to the numerical value of the new tile created.
+	public void setScore(int newTileValue) {
+		Engine.score += newTileValue;
+	}
+
 	public int getScore() {
-		//i have no idea how to calc score
-		final int newScore = 0;
-		for (int i = 0; i < 16; i++) {
-			//buffer[i%4][i/4];
-		}
-		return newScore;
+		return Engine.score;
 	}
 
 }
