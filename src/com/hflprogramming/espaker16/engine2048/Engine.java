@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Engine {
-	static final int d_up = 1;
-	static final int d_down = 3;
-	static final int d_left = 4;
-	static final int d_right = 2;
+	static final int D_UP = 1;
+	static final int D_DOWN = 3;
+	static final int D_LEFT = 4;
+	static final int D_RIGHT = 2;
 
 	public int score;
 
@@ -22,26 +22,26 @@ public class Engine {
 		int[][] buffer = gameboard.clone();//Don't know if i need this ( ".clone()" );
 
 		switch (direction) {
-		case d_up:
+		case D_UP:
 			//two rotations
 			buffer = rotateBoard(2, buffer);
 			buffer = moveDown(buffer);
 			buffer = rotateBoard(2, buffer);
 			break;
 
-		case d_down:
+		case D_DOWN:
 			//no rotation
 			buffer = moveDown(buffer);
 			break;
 
-		case d_left:
+		case D_LEFT:
 			//three rotations
 			buffer = rotateBoard(3, buffer);
 			buffer = moveDown(buffer);
 			buffer = rotateBoard(1, buffer);
 			break;
 
-		case d_right:
+		case D_RIGHT:
 			//one rotation
 			buffer = rotateBoard(1, buffer);
 			buffer = moveDown(buffer);
