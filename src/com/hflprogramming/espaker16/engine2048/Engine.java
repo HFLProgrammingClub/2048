@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Engine {
-	static final int d_up = 1;
-	static final int d_down = 3;
-	static final int d_left = 4;
-	static final int d_right = 2;
+	static final int D_UP = 1;
+	static final int D_DOWN = 3;
+	static final int D_LEFT = 4;
+	static final int D_RIGHT = 2;
+
+	public int score;
 
 	private int[][] gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 
@@ -20,26 +22,26 @@ public class Engine {
 		int[][] buffer = gameboard;//Don't know if i need this ( ".clone()" );
 
 		switch (direction) {
-		case d_up:
+		case D_UP:
 			//two rotations
 			buffer = rotateBoard(2, buffer);
 			buffer = moveDown(buffer);
 			buffer = rotateBoard(2, buffer);
 			break;
 
-		case d_down:
+		case D_DOWN:
 			//no rotation
 			buffer = moveDown(buffer);
 			break;
 
-		case d_left:
+		case D_LEFT:
 			//three rotations
 			buffer = rotateBoard(3, buffer);
 			buffer = moveDown(buffer);
 			buffer = rotateBoard(1, buffer);
 			break;
 
-		case d_right:
+		case D_RIGHT:
 			//one rotation
 			buffer = rotateBoard(1, buffer);
 			buffer = moveDown(buffer);
@@ -84,11 +86,11 @@ public class Engine {
 	}
 
 	private void onGameOver() {
-		//nothing yet
+		// TODO: add onGameOver() functionality
 	}
 
 	private void onMove() {
-		//nothing yet
+		// TODO: add onMove() functionality
 	}
 
 	/*
@@ -127,6 +129,8 @@ public class Engine {
 					if (block == nblock && block != 0) {
 						board[row][col] = nblock * 2;
 						board[row][b] = -1;
+
+						setScore(nblock * 2);
 
 						valid = true;
 
@@ -176,13 +180,13 @@ public class Engine {
 		return true;
 	}
 
+	// 'newTileValue' is supposed to be set to the numerical value of the new tile created.
+	public void setScore(int newTileValue) {
+		this.score += newTileValue;
+	}
+
 	public int getScore() {
-		//i have no idea how to calc score
-		final int newScore = 0;
-		for (int i = 0; i < 16; i++) {
-			//buffer[i%4][i/4];
-		}
-		return newScore;
+		return this.score;
 	}
 
 }
