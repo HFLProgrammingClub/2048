@@ -1,42 +1,25 @@
 package view;
 
 import java.awt.Point;
-import java.util.List;
-import java.util.Map;
 
 import com.googlecode.lanterna.screen.ScreenCharacter;
 
-//class to be extended to control a structure
-abstract public class Blueprints {
-	
-	Map<String, Point> points;
-	List<Line> lines;//draws lines between points
-	
-	public void draw(Structure s){
-		for(Line l : lines){
-			s.line(points.get(l.pointOne).x, points.get(l.pointOne).y, points.get(l.pointTwo).x, points.get(l.pointTwo).y, l.character);
-		}
+public final class Blueprints {
+	public static void drawBorder(Structure structure, char left, char right, char top, char bottom) {
+		drawBorder(structure, new ScreenCharacter(left), new ScreenCharacter(right), new ScreenCharacter(top), new ScreenCharacter(bottom));
 	}
-	
-	public void setPoint(String name, int x, int y){
-		points.get(name).x = x;
-		points.get(name).y = y;
 
-	}
-	
-}
+	public static void drawBorder(Structure structure, ScreenCharacter left, ScreenCharacter right, ScreenCharacter top, ScreenCharacter bottom) {
+		//create boarder
 
-class Line{
-	String pointOne;
-	String pointTwo;
-	
-	ScreenCharacter character;
-	
-	Line(String a, String b, ScreenCharacter c){
-		pointOne= a;
-		pointTwo= b;
-		
-		character= c;
+		structure.points.put("top_left", new Point(0, 0));
+		structure.points.put("top_right", new Point(structure.width - 1, 0));
+		structure.points.put("bottom_left", new Point(0, structure.height - 1));
+		structure.points.put("bottom_right", new Point(structure.width - 1, structure.height - 1));
+
+		structure.lines.put("top", new Line("top_left", "top_right", '='));
+		structure.lines.put("left", new Line("top_left", "bottom_left", '|'));
+		structure.lines.put("right", new Line("bottom_left", "bottom_right", '='));
+		structure.lines.put("bottom", new Line("top_right", "bottom_right", '|'));
 	}
 }
-

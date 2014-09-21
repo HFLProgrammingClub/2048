@@ -17,7 +17,7 @@ public class Engine {
 
 	//0:invalid, 1:valid, -1:game-over
 	public int swipe(int direction) {
-		int[][] buffer = gameboard.clone();//Don't know if i need this ( ".clone()" );
+		int[][] buffer = gameboard;//Don't know if i need this ( ".clone()" );
 
 		switch (direction) {
 		case d_up:

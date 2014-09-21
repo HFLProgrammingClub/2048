@@ -1,54 +1,43 @@
 package com.hflprogramming.espaker16.engine2048;
 
-import java.util.Map;
-
-import com.googlecode.lanterna.screen.ScreenCharacter;
-
 import view.Blueprints;
 import view.Pane;
 import view.Structure;
 import view.View;
 
 public class Display {
-	Board boardBlueprint = new Board();
 	View view = new View();
 	Structure board;
 	Structure screen;
 
 	Display() {
-		
+
 	}
 }
 
 //might make this static or final
-class Board extends Blueprints {
+class Board extends Structure {
 
-	Map<String, String> defaults;
+	Board(Pane parentPane) {
+		super(parentPane.height - 4, (parentPane.height < parentPane.width ? parentPane.height : parentPane.width) - 4);
 
-	Board(){
-		defaults = {"position":"relative","posX":"0","posY":"0","height":"100","width":"100"};
+		//create boarder
+		Blueprints.drawBorder(this, '|', '|', '=', '=');
+
+		draw();
 	}
 
-	Board(Map<String, String> d) {
-		defaults = d;
+}
+
+class Tile extends Structure {
+
+	Tile(int x, int y, int posX, int posY) {
+		super(x, y, posX, posY);
+
+		//create boarder
+		Blueprints.drawBorder(this, '|', '|', '=', '=');
+
+		draw();
 	}
 
-	Structure newBoard(Pane parentPane) {
-		final int height = parentPane.height - 4;
-		final int width = height;
-
-		final Structure newBoard = new Structure(width, height);
-		newBoard.blueprints = this;
-		newBoard.update();
-		return newBoard;
-	}
-
-	@Override
-	public void draw(Structure structure) {
-		structure.line(0, 0, structure.width-1, 0, new ScreenCharacter('='));
-		structure.line(0, 0, 0, structure.height-1, new ScreenCharacter('|'));
-		structure.line(structure.width-1, structure.height-1, structure.width-1, 0, new ScreenCharacter('|'));
-		structure.line(structure.width-1, structure.height-1, 0, structure.height-1, new ScreenCharacter('='));
-
-	}
 }
