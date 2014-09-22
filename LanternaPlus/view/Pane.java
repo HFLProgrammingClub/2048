@@ -6,7 +6,7 @@ import java.util.List;
 import com.googlecode.lanterna.screen.ScreenCharacter;
 
 public class Pane {
-	List<Pane> subpanes = new ArrayList<Pane>();//top is last in list
+	public List<Pane> subpanes = new ArrayList<Pane>();//top is last in list
 	ScreenCharacter[][] buffer;
 
 	public int width;
@@ -175,8 +175,7 @@ public class Pane {
 
 	}
 
-	public void vectorLine(int x, int y, int length, String direction,
-			ScreenCharacter character) {
+	public void vectorLine(int x, int y, int length, String direction, ScreenCharacter character) {
 		switch (direction) {
 		case "up":
 			for (int i = 0; i < length; i++) {
@@ -282,6 +281,10 @@ public class Pane {
 		return pane;
 	}
 
+	public void addPane(Pane pane) {
+		subpanes.add(pane);
+	}
+
 	public void refresh() {
 		for (int i = 0; i < subpanes.size(); i++) {
 			final Pane pane = subpanes.get(i);
@@ -289,8 +292,7 @@ public class Pane {
 
 			for (int x = 0; x < pane.width; x++) {
 				for (int y = 0; y < pane.height; y++) {
-					if (x + pane.offsetX < width && y + pane.offsetY < height
-							&& pane.buffer[x][y] != null) {
+					if (x + pane.offsetX < width && y + pane.offsetY < height && pane.buffer[x][y] != null) {
 						buffer[x + pane.offsetX][y + pane.offsetY] = pane.buffer[x][y];
 					}
 				}

@@ -28,17 +28,16 @@ public class Structure extends Pane {
 	}
 
 	public void update(String message) {
-
+		//TODO do something with this function
 	}
 
 	public void draw() {
 		fill(new ScreenCharacter(' '));
 
 		for (final Line l : lines.values()) {
-			line(points.get(l.pointOne).x, points.get(l.pointOne).y,
-					points.get(l.pointTwo).x, points.get(l.pointTwo).y,
-					l.character);
+			archive.line(points.get(l.pointOne).x, points.get(l.pointOne).y, points.get(l.pointTwo).x, points.get(l.pointTwo).y, l.character);
 		}
+		reset();
 	}
 
 	void reset() {

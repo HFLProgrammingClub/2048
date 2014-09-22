@@ -17,9 +17,9 @@ public final class Blueprints {
 		structure.points.put("bottom_left", new Point(0, structure.height - 1));
 		structure.points.put("bottom_right", new Point(structure.width - 1, structure.height - 1));
 
-		structure.lines.put("top", new Line("top_left", "top_right", '='));
-		structure.lines.put("left", new Line("top_left", "bottom_left", '|'));
-		structure.lines.put("right", new Line("bottom_left", "bottom_right", '='));
-		structure.lines.put("bottom", new Line("top_right", "bottom_right", '|'));
+		structure.lines.put("top", new Line("top_left", "top_right", top));
+		structure.lines.put("left", new Line("top_left", "bottom_left", left));
+		structure.lines.put("bottom", new Line("bottom_left", "bottom_right", bottom));
+		structure.lines.put("right", new Line("top_right", "bottom_right", right));
 	}
 }

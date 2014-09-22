@@ -89,6 +89,10 @@ public class View {
 		return pane;
 	}
 
+	public void addPane(Pane pane) {
+		panes.add(pane);
+	}
+
 	public void stop() {
 		screen.stopScreen();
 	}
