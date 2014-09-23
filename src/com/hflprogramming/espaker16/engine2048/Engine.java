@@ -122,7 +122,7 @@ public class Engine {
 		for (int row = 0; row < 4; row++) {
 			for (int col = 0; col < 4; col++) {
 				for (int b = col + 1; b < 4; b++) {
-					//didn't feel like explaining this in comments
+					//TODO feel like explaining this in comments
 					final int block = board[row][col];
 					final int nblock = board[row][b];
 
