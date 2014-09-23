@@ -1,1 +1,1 @@
-A [2048](https://gabrielecirulli.github.io/2048/) engine, written in GNU/Java + [Lanerna](https://code.google.com/p/lanterna/), for use in the HF-L Programming Club 2048 AI competition.
+A [2048](https://gabrielecirulli.github.io/2048/) engine, written in [Java](http://www.bing.com/search?q=java&go=Submit&qs=n&form=QBRE&pq=java&sc=8-4&sp=-1&sk=&cvid=189b6b7ea29c4f1eb6a9ba4377c30763&adlt=strict) + [Lanerna](https://code.google.com/p/lanterna/), for use in the HF-L Programming Club 2048 AI competition.
