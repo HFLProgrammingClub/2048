@@ -2,6 +2,7 @@ package com.hflprogramming.espaker16.engine2048;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Engine {
 	static final int D_UP = 1;
@@ -64,9 +65,9 @@ public class Engine {
 				}
 			}
 
-			final int random = (int) (Math.random() * emptyCells.size());//get a random integer between 0(inclusive) and the number of empty cells(exclusive)
-			final int cell = emptyCells.get(random);
-			buffer[cell % 4][cell / 4] = Math.random() < 9 ? 2 : 4;//place new tile
+			final Random random = new Random();
+			final int cell = emptyCells.get(random.nextInt(emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
+			buffer[cell % 4][cell / 4] = random.nextInt(10) <= 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
 
 			gameboard = buffer.clone();//set gameboard to new state
 
