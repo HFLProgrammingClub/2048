@@ -81,9 +81,7 @@ public class Engine {
 
 			onMove();
 			return 1;
-
 		}
-
 	}
 
 	private void onGameOver() {
@@ -157,7 +155,6 @@ public class Engine {
 			//set board[0][0] to -1 to signify an invalid board move (aka: nothing moves)
 			board[0][0] = -1;
 			return board;
-
 		}
 	}
 
@@ -177,7 +174,6 @@ public class Engine {
 				}
 			}
 		}
-
 		return true;
 	}
 
@@ -189,5 +185,4 @@ public class Engine {
 	public int getScore() {
 		return this.score;
 	}
-
 }

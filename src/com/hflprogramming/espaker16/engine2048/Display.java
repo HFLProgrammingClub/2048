@@ -44,7 +44,6 @@ class DisplayBoard extends Structure {
 
 			internalView.subpanes.add(new DisplayTile(tileWidth - 1, tileHeight, tileWidth * x + x, tileHeight * y));
 		}
-
 		draw();
 	}
 }
@@ -58,6 +57,5 @@ class DisplayTile extends Structure {
 		Blueprints.drawBorder(this, '|', '|', '_', '\u203E');//\u203E is an overline character
 
 		draw();
-
 	}
 }
