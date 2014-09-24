@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Random;
 
 public class Engine {
-	static final int D_UP = 1;
-	static final int D_DOWN = 3;
-	static final int D_LEFT = 4;
-	static final int D_RIGHT = 2;
-
-	public int score;
-
 	private int[][] gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 
 	public int[][] look() {
 		return gameboard;
 	}
 
+	public int score;
+
+	static final byte D_LEFT = 0;
+	static final byte D_DOWN = 1;
+	static final byte D_UP = 2;
+	static final byte D_RIGHT = 3;
+
 	//0:invalid, 1:valid, -1:game-over
-	public int swipe(int direction) {
+	public int swipe(byte direction) {
 		int[][] buffer = gameboard;//Don't know if i need this ( ".clone()" );
 
 		switch (direction) {
