@@ -66,8 +66,8 @@ public class Engine {
 			}
 
 			final Random random = new Random();
-			final int cell = emptyCells.get(random.nextInt(emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
-			buffer[cell % 4][cell / 4] = random.nextInt(10) <= 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
+			final int cell = emptyCells.get((int) (random.nextDouble() * emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
+			buffer[cell % 4][cell / 4] = random.nextDouble() < .9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
 
 			gameboard = buffer.clone();//set gameboard to new state
 
