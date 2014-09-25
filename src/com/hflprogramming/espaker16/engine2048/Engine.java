@@ -13,10 +13,10 @@ public class Engine {
 
 	public int score;
 
-	static final byte D_LEFT = 0;
-	static final byte D_DOWN = 1;
-	static final byte D_UP = 2;
-	static final byte D_RIGHT = 3;
+	public static final byte D_LEFT = 0;
+	public static final byte D_DOWN = 1;
+	public static final byte D_UP = 2;
+	public static final byte D_RIGHT = 3;
 
 	//0:invalid, 1:valid, -1:game-over
 	public int swipe(byte direction) {
