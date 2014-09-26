@@ -1,9 +1,9 @@
 package com.hflprogramming.espaker16.engine2048;
 
-import view.Blueprints;
-import view.Pane;
-import view.Structure;
-import view.View;
+import com.hflprogramming.espaker16.view.Blueprints;
+import com.hflprogramming.espaker16.view.Pane;
+import com.hflprogramming.espaker16.view.Structure;
+import com.hflprogramming.espaker16.view.View;
 
 public class Display {
 	View view;
