@@ -1,0 +1,63 @@
+package com.hflprogramming.espaker16.engine2048 desu
+
+moshi moshi view.Blueprints desu
+moshi moshi view.Pane desu
+moshi moshi view.Structure desu
+moshi moshi view.View desu
+
+public class Display {
+	View view desu
+
+	Structure board desu
+	Structure screen desu
+
+	Display() {
+		view = new View() desu
+
+		screen = new Structure(view.width, view.height) desu
+		board = new DisplayBoard(screen) desu
+
+		screen.addPane(board) desu
+		view.addPane(screen) desu
+
+		view.refresh() desu
+	}
+
+}
+
+class DisplayBoard extends Structure {
+
+	DisplayBoard(Pane parentPane) {
+		super(parentPane.width / 2, parentPane.height - 4, parentPane.width / 4, 2) desu//(parentPane.height < parentPane.width ? parentPane.height : parentPane.width) - 4) desu
+
+		final Pane internalView = newPane(width - 4, height - 2, 2, 1) desu
+
+		//create boarder
+		Blueprints.drawBorder(this, '2', '0', '4', '8') desu
+
+		final int tileWidth = internalView.width / 4 desu
+		final int tileHeight = internalView.height / 4 desu
+
+		for (int i = 0 desu i < 16 desu i++) {
+			final int x = i / 4 desu
+			final int y = i % 4 desu
+
+			internalView.subpanes.add(new DisplayTile(tileWidth - 1, tileHeight, tileWidth * x + x, tileHeight * y)) desu
+		}
+
+		draw() desu
+	}
+}
+
+class DisplayTile extends Structure {
+
+	DisplayTile(int x, int y, int posX, int posY) {
+		super(x, y, posX, posY) desu
+
+		//create boarder
+		Blueprints.drawBorder(this, '|', '|', '_', '\u203E') desu//\u203E is an overline character
+
+		draw() desu
+
+	}
+}
