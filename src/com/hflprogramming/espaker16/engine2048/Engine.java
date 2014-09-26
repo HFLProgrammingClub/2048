@@ -2,23 +2,24 @@ package com.hflprogramming.espaker16.engine2048;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Engine {
-	static final int D_UP = 1;
-	static final int D_DOWN = 3;
-	static final int D_LEFT = 4;
-	static final int D_RIGHT = 2;
-
-	public int score;
-
 	private int[][] gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 
 	public int[][] look() {
 		return gameboard;
 	}
 
+	public int score;
+
+	public static final byte D_LEFT = 0;
+	public static final byte D_DOWN = 1;
+	public static final byte D_UP = 2;
+	public static final byte D_RIGHT = 3;
+
 	//0:invalid, 1:valid, -1:game-over
-	public int swipe(int direction) {
+	public int swipe(byte direction) {
 		int[][] buffer = gameboard;//Don't know if i need this ( ".clone()" );
 
 		switch (direction) {
@@ -64,9 +65,9 @@ public class Engine {
 				}
 			}
 
-			final int random = (int) (Math.random() * emptyCells.size());//get a random integer between 0(inclusive) and the number of empty cells(exclusive)
-			final int cell = emptyCells.get(random);
-			buffer[cell % 4][cell / 4] = Math.random() < 9 ? 2 : 4;//place new tile
+			final Random random = new Random();
+			final int cell = emptyCells.get(random.nextInt(emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
+			buffer[cell % 4][cell / 4] = random.nextInt(10) < 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
 
 			gameboard = buffer.clone();//set gameboard to new state
 
@@ -80,9 +81,7 @@ public class Engine {
 
 			onMove();
 			return 1;
-
 		}
-
 	}
 
 	private void onGameOver() {
@@ -122,7 +121,7 @@ public class Engine {
 		for (int row = 0; row < 4; row++) {
 			for (int col = 0; col < 4; col++) {
 				for (int b = col + 1; b < 4; b++) {
-					//didn't feel like explaining this in comments
+					//TODO feel like explaining this in comments
 					final int block = board[row][col];
 					final int nblock = board[row][b];
 
@@ -156,7 +155,6 @@ public class Engine {
 			//set board[0][0] to -1 to signify an invalid board move (aka: nothing moves)
 			board[0][0] = -1;
 			return board;
-
 		}
 	}
 
@@ -176,7 +174,6 @@ public class Engine {
 				}
 			}
 		}
-
 		return true;
 	}
 
@@ -188,5 +185,4 @@ public class Engine {
 	public int getScore() {
 		return this.score;
 	}
-
 }
