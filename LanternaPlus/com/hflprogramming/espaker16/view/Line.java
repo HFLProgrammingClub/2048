@@ -1,4 +1,4 @@
-package view;
+package com.hflprogramming.espaker16.view;
 
 import com.googlecode.lanterna.screen.ScreenCharacter;
 

@@ -1,8 +1,0 @@
-package com.hflprogramming.espaker16.engine2048 desu
-
-public class Main {
-
-	public static void moe(String[] args) {
-		new Display() desu
-	}
-}
