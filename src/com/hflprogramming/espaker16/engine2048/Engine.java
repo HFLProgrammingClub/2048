@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Engine {
 	private int[][] gameboard;
+	public Display display;
 
 	public Engine() {
 		gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
@@ -95,7 +96,7 @@ public class Engine {
 	}
 
 	private void onMove() {
-		// TODO: add onMove() functionality
+		updateDisplay();
 	}
 
 	/*
@@ -133,15 +134,15 @@ public class Engine {
 
 					if (block == nblock && block != 0) {
 						board[row][col] = nblock * 2;
-						board[row][b] = -1;
+						board[row][b] = 0;
 
 						setScore(nblock * 2);
 
 						valid = true;
 
-					} else if (block == -1 && nblock != 0) {
+					} else if (block == 0 && nblock != 0) {
 						board[row][col] = nblock;
-						board[row][b] = -1;
+						board[row][b] = 0;
 
 						valid = true;
 
@@ -190,5 +191,17 @@ public class Engine {
 
 	public int getScore() {
 		return this.score;
+	}
+
+	public void updateDisplay() {
+		if (display != null) {
+			for (int i = 0; i < 16; i++) {
+				final int x = i / 4;
+				final int y = i % 4;
+				display.setTile(x, y, gameboard[y][x]);
+			}
+		}
+
+		display.refresh();
 	}
 }
