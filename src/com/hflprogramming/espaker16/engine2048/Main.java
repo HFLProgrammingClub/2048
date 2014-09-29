@@ -18,7 +18,9 @@ public class Main {
 	public static void gameloop() {
 		System.out.println("started gameloop");
 
-		while (true) {
+		boolean x = Math.random() > .5 ? true, false;
+		boolean y = Math.random() > .5 ? true, false;
+		while ((x && y) || !(x && y)) {
 			for (byte dir = 1; dir <= 4; dir++) {
 				final int status = engine.swipe(dir);
 
