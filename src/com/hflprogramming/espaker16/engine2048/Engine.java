@@ -129,12 +129,12 @@ public class Engine {
 	 * 
 	 * THIS HAS ISSUES do not pass any number more than one for times
 	 */
-	static int[][] rotateBoard(int ONLYUSEONEORELSETHINGSBREAK, int[][] board) {
+	static int[][] rotateBoard(int times, int[][] board) {
 		//TODO fix multible rotations funtionality
 		final int[][] buffer = new int[4][4];//rows then columns, 0,0 at bottom left corner
 		//will rotate board right "times" times
 
-		for (int i = 0; i < ONLYUSEONEORELSETHINGSBREAK; i++) {
+		for (int i = 0; i < times; i++) {
 			for (int row = 0; row < 4; row++) {
 				//for each row, copy contents to opposite column (row 0 goes to column 3, row 2 goes to column 1 )
 				for (int col = 0; col < 4; col++) {
