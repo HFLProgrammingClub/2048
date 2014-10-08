@@ -36,12 +36,14 @@ public class Engine {
 			//two rotations
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
+
 			try {
 				gameboard = moveDown(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
 				return 0;
 			}
+
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
 			break;
@@ -61,24 +63,28 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
+
 			try {
 				gameboard = moveDown(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
 				return 0;
 			}
+
 			gameboard = rotateBoard(1, gameboard);
 			break;
 
 		case D_UP:
 			//one rotation
 			gameboard = rotateBoard(1, gameboard);
+
 			try {
 				gameboard = moveDown(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
 				return 0;
 			}
+
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
 			gameboard = rotateBoard(1, gameboard);
@@ -101,6 +107,7 @@ public class Engine {
 
 		//check for end of game
 		if (emptyCells.size() < 2) {
+			System.out.println("game may be over");
 			if (isGameOver(gameboard)) {
 				onGameOver();
 				return -1;
@@ -113,9 +120,8 @@ public class Engine {
 	}
 
 	private void onGameOver() {
-		// TODO: add onGameOver() functionality
+		System.out.println("game over");
 		updateDisplay();
-		System.out.print("game over");
 
 	}
 
@@ -201,7 +207,7 @@ public class Engine {
 				}
 			}
 		}
-		
+
 		for (int col = 0; col < 4; col++) {
 			for (int row = 0; row < 3; row++) {
 				if (board[row][col] == board[row + 1][col]) {

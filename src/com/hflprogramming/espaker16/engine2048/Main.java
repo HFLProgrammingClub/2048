@@ -30,7 +30,7 @@ public class Main {
 		try {
 			gameloop();
 		} catch (final Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("Gameloop ended");
 		}
 
 	}
@@ -38,24 +38,29 @@ public class Main {
 	public static void gameloop() throws Exception {
 		System.out.println("started gameloop");
 
-		final boolean x = Math.random() > .5 ? true : false;
-		final boolean y = Math.random() > .5 ? true : false;
-		while (x && y || !(x && y)) {
-			for (byte dir = 1; dir <= 4; dir++) {
+		while (true) {
+			System.out.println("turn started");
+			for (byte dir = 0; dir < 4; dir++) {
+				System.out.println("trying direction " + dir);
+
 				final int status = engine.swipe(dir);
 
-				if (status == 0) {
+				if (status == 1) {
+					System.out.println("direction worked next turn");
+
 					try {
 						Thread.currentThread().sleep(80);//sleep for 1000 ms
 					} catch (final InterruptedException e) {
 						e.printStackTrace();
 					}
-					continue;
-
-				} else if (status == 1) {
 					break;
 
+				} else if (status == 0) {
+					System.out.println("direction failed");
+					continue;
+
 				} else {
+					System.out.println("direction worked game over");
 					throw new Exception();
 				}
 			}
