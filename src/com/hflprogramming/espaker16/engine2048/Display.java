@@ -1,5 +1,6 @@
 package com.hflprogramming.espaker16.engine2048;
 
+import com.googlecode.lanterna.screen.ScreenCharacter;
 import com.hflprogramming.espaker16.view.Blueprints;
 import com.hflprogramming.espaker16.view.Pane;
 import com.hflprogramming.espaker16.view.Structure;
@@ -8,7 +9,7 @@ import com.hflprogramming.espaker16.view.View;
 public class Display {
 	View view;
 
-	Structure board;
+	DisplayBoard board;
 	Structure screen;
 
 	Display() {
@@ -23,14 +24,23 @@ public class Display {
 		view.refresh();
 	}
 
+	public void setTile(int x, int y, int number) {
+		board.setTile(x, y, number);
+	}
+
+	public void refresh() {
+		view.refresh();
+	}
+
 }
 
 class DisplayBoard extends Structure {
+	final Pane internalView;
 
 	DisplayBoard(Pane parentPane) {
 		super(parentPane.width / 2, parentPane.height - 4, parentPane.width / 4, 2);//(parentPane.height < parentPane.width ? parentPane.height : parentPane.width) - 4);
 
-		final Pane internalView = newPane(width - 4, height - 2, 2, 1);
+		internalView = newPane(width - 4, height - 2, 2, 1);
 
 		//create boarder
 		Blueprints.drawBorder(this, '2', '0', '4', '8');
@@ -46,6 +56,11 @@ class DisplayBoard extends Structure {
 		}
 		draw();
 	}
+
+	public void setTile(int x, int y, int number) {
+		final DisplayTile tile = (DisplayTile) internalView.subpanes.get(x * 4 + y);
+		tile.setNumber(number);
+	}
 }
 
 class DisplayTile extends Structure {
@@ -58,4 +73,32 @@ class DisplayTile extends Structure {
 
 		draw();
 	}
+
+	public void setNumber(int number) {
+		final String numericString = String.valueOf(number);
+		final int length = numericString.length();
+
+		fill(1, 1, width - 2, height - 2, new ScreenCharacter(' '));
+
+		if (length > width - 2) {
+			//TODO fix issues with centering text
+
+			final int lines = (int) Math.ceil((double) length / (width - 2));
+			final int startLine = (height - 2 - lines) / 2;
+			int startColumn = 0;
+
+			if (lines > height - 2) {
+				return; //cant display number
+			}
+			if (lines == 1) {
+				startColumn = (width - 2 - length) / 2;
+			}
+			write(startColumn, startLine, numericString);
+
+		} else {
+			write((width - 2 - length) / 2 + 1, (height - 2) / 2 + 1, numericString);
+		}
+
+	}
+
 }

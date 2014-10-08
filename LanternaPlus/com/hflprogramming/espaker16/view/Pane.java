@@ -39,10 +39,22 @@ public class Pane {
 	}
 
 	public void write(int x, int y, String text) {
-		write(x, y, text, "right");
+		final char[] chars = text.toCharArray();
+		int posX;
+		int posY;
+
+		for (int i = 0; i < chars.length; i++) {
+			posY = y + i / width;
+			posX = x + i % width;
+
+			if (posX < width && posY < height) {
+				buffer[posX][posY] = new ScreenCharacter(chars[i]);
+			}
+
+		}
 	}
 
-	public void write(int x, int y, String text, String direction) {
+	public void vectorWrite(int x, int y, String text, String direction) {
 		final char[] chars = text.toCharArray();
 
 		switch (direction) {
@@ -245,22 +257,31 @@ public class Pane {
 
 	public void clear() {
 		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < width; y++) {
+			for (int y = 0; y < height; y++) {
 				buffer[x][y] = null;
 			}
 		}
 	}
 
 	public void fill(ScreenCharacter character) {
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				buffer[x][y] = new ScreenCharacter(character);
-			}
-		}
+		fill(0, 0, width, height, character);
 	}
 
 	public void fill(char character) {
 		fill(new ScreenCharacter(character));
+	}
+
+	public void fill(int x, int y, int w, int h, ScreenCharacter c) {
+		for (int posX = x; posX < x + w; posX++) {
+			for (int posY = y; posY < y + h; posY++) {
+				try {
+					buffer[posX][posY] = new ScreenCharacter(c);
+				} catch (final ArrayIndexOutOfBoundsException e) {
+					System.out.println("out of bounds ERROR");
+				}
+			}
+
+		}
 	}
 
 	public Pane newPane() {
