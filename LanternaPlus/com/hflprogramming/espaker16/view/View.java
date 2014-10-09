@@ -12,8 +12,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 public class View {
 
-	Screen screen;
-	Terminal terminal;
+	public Screen screen;
+	public Terminal terminal;
 	ScreenWriter writer;
 
 	List<Pane> panes = new ArrayList<Pane>(); //objects to draw, top is last in list
