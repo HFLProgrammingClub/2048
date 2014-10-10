@@ -56,6 +56,11 @@ public class Main {
 					engine.redo();
 					break;
 
+				case Escape:
+					engine.display.view.screen.stopScreen();
+					System.exit(0);
+					break;
+
 				default:
 					break;
 				}

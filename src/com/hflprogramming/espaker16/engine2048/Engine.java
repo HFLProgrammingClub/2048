@@ -84,9 +84,11 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -97,7 +99,7 @@ public class Engine {
 		case D_LEFT:
 			//no rotation
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
 				return 0;
@@ -111,9 +113,10 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -125,9 +128,12 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -206,7 +212,7 @@ public class Engine {
 	}
 
 	//helper function for sliding and merging the tiles down
-	private int[][] moveDown(int[][] board) throws Exception {
+	private int[][] moveRight(int[][] board) throws Exception {
 		boolean valid = false;
 
 		for (int row = 0; row < 4; row++) {
