@@ -2,6 +2,8 @@ package com.hflprogramming.espaker16.engine2048;
 
 import java.util.Scanner;
 
+import com.googlecode.lanterna.input.Key;
+
 public class Main {
 
 	static Engine engine;
@@ -13,19 +15,7 @@ public class Main {
 
 		engine.startGame();
 
-		engine.swipe(engine.D_DOWN);
-
-		/*
-		 * test code for playing manually (with numbers entered into console)
-		while (true) {
-			final byte i = (byte) scanner.nextInt();
-			if (i >= 0 && i < 4) {
-				if (engine.swipe(i) == 1) {
-					System.out.println("swipe");
-				}
-			}
-		}
-		*/
+		testPlay();
 
 		try {
 			gameloop();
@@ -35,15 +25,61 @@ public class Main {
 
 	}
 
+	public static void testPlay() {
+		//final test code for final playing manually (final with numbers entered final into console)
+		while (true) {
+			final Key key = engine.display.view.terminal.readInput();
+			if (key != null) {
+				switch (key.getKind()) {
+
+				case ArrowLeft:
+					engine.swipe(engine.D_LEFT);
+					break;
+
+				case ArrowRight:
+					engine.swipe(engine.D_RIGHT);
+					break;
+
+				case ArrowUp:
+					engine.swipe(engine.D_UP);
+					break;
+
+				case ArrowDown:
+					engine.swipe(engine.D_DOWN);
+					break;
+
+				case PageUp:
+					engine.undo();
+					break;
+
+				case PageDown:
+					engine.redo();
+					break;
+
+				case Escape:
+					engine.display.view.screen.stopScreen();
+					System.exit(0);
+					break;
+
+				default:
+					break;
+				}
+			}
+
+		}
+	}
+
 	public static void gameloop() throws Exception {
+		final byte[] directionPriority = { Engine.D_DOWN, Engine.D_LEFT, Engine.D_RIGHT, Engine.D_UP };
+
 		System.out.println("started gameloop");
 
 		while (true) {
 			System.out.println("turn started");
 			for (byte dir = 0; dir < 4; dir++) {
-				System.out.println("trying direction " + dir);
+				System.out.println("trying direction " + directionPriority[dir]);
 
-				final int status = engine.swipe(dir);
+				final int status = engine.swipe(directionPriority[dir]);
 
 				if (status == 1) {
 					System.out.println("direction worked next turn");

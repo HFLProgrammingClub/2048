@@ -1,6 +1,7 @@
 package com.hflprogramming.espaker16.engine2048;
 
 import com.googlecode.lanterna.screen.ScreenCharacter;
+import com.googlecode.lanterna.terminal.Terminal;
 import com.hflprogramming.espaker16.view.Blueprints;
 import com.hflprogramming.espaker16.view.Pane;
 import com.hflprogramming.espaker16.view.Structure;
@@ -80,25 +81,83 @@ class DisplayTile extends Structure {
 
 		fill(1, 1, width - 2, height - 2, new ScreenCharacter(' '));
 
-		if (length > width - 2) {
-			//TODO fix issues with centering text
+		if (number != 0) {
+			if (length > width - 2) {
+				//TODO fix issues with centering text
 
-			final int lines = (int) Math.ceil((double) length / (width - 2));
-			final int startLine = (height - 2 - lines) / 2;
-			int startColumn = 0;
+				final int lines = (int) Math.ceil((double) length / (width - 2));
+				final int startLine = (height - 2 - lines) / 2;
+				int startColumn = 0;
 
-			if (lines > height - 2) {
-				return; //cant display number
+				if (lines > height - 2) {
+					return; //cant display number
+				}
+				if (lines == 1) {
+					startColumn = (width - 2 - length) / 2;
+				}
+				write(startColumn, startLine, numericString);
+
+			} else {
+				write((width - 2 - length) / 2 + 1, (height - 2) / 2 + 1, numericString);
 			}
-			if (lines == 1) {
-				startColumn = (width - 2 - length) / 2;
-			}
-			write(startColumn, startLine, numericString);
-
-		} else {
-			write((width - 2 - length) / 2 + 1, (height - 2) / 2 + 1, numericString);
 		}
+
+		Blueprints.setColor(this, getColor(number), 1);
 
 	}
 
+	//returns {forground, background}
+	public Terminal.Color[] getColor(int number) {
+		final Terminal.Color colors[] = { Terminal.Color.DEFAULT, Terminal.Color.DEFAULT };
+
+		switch (number) {
+		case 2:
+			colors[0] = Terminal.Color.BLACK;
+			colors[1] = Terminal.Color.WHITE;
+			break;
+
+		case 4:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.YELLOW;
+			break;
+
+		case 8:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.RED;
+			break;
+
+		case 16:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.MAGENTA;
+			break;
+
+		case 32:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.BLUE;
+			break;
+
+		case 64:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.CYAN;
+			break;
+
+		case 128:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.BLUE;
+			break;
+
+		case 256:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.BLACK;
+			break;
+
+		default:
+			colors[0] = Terminal.Color.WHITE;
+			colors[1] = Terminal.Color.BLACK;
+			break;
+		}
+
+		return colors;
+
+	}
 }

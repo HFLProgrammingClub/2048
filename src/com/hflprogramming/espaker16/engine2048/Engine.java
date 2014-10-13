@@ -8,6 +8,46 @@ public class Engine {
 	int[][] gameboard;
 	public Display display;
 
+	//for testing
+	public List<int[][]> history = new ArrayList<int[][]>();
+	public int current = 0;
+
+	void loadHistory(int index) {
+		current = index;
+		if (current < 0) {
+			current = 0;
+		}
+		if (current >= history.size()) {
+			current = history.size() - 1;
+		}
+		gameboard = history.get(current);
+		updateDisplay();
+	}
+
+	void undo() {
+		current += 1;
+		if (current < 0) {
+			current = 0;
+		}
+		if (current >= history.size()) {
+			current = history.size() - 1;
+		}
+		gameboard = history.get(current);
+		updateDisplay();
+	}
+
+	void redo() {
+		current -= 1;
+		if (current < 0) {
+			current = 0;
+		}
+		if (current >= history.size()) {
+			current = history.size() - 1;
+		}
+		gameboard = history.get(current);
+		updateDisplay();
+	}
+
 	public Engine() {
 		gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
 	}
@@ -31,6 +71,12 @@ public class Engine {
 
 	//0:invalid, 1:valid, -1:game-over
 	public int swipe(byte direction) {
+		if (current != 0) {
+			for (int i = 0; i < current; i++) {
+				history.remove(i);
+			}
+		}
+
 		switch (direction) {
 		case D_RIGHT:
 			//two rotations
@@ -38,9 +84,11 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -51,7 +99,7 @@ public class Engine {
 		case D_LEFT:
 			//no rotation
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
 				return 0;
@@ -65,9 +113,10 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -79,9 +128,12 @@ public class Engine {
 			gameboard = rotateBoard(1, gameboard);
 
 			try {
-				gameboard = moveDown(gameboard);
+				gameboard = moveRight(gameboard);
 			} catch (final Exception e) {
 				//invalid move return false
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
+				gameboard = rotateBoard(1, gameboard);
 				return 0;
 			}
 
@@ -112,6 +164,8 @@ public class Engine {
 				onGameOver();
 				return -1;
 			}
+			System.out.println("but its not");
+
 		}
 
 		onMove();
@@ -121,18 +175,20 @@ public class Engine {
 
 	private void onGameOver() {
 		System.out.println("game over");
+		history.add(0, gameboard);
 		updateDisplay();
 
 	}
 
 	private void onMove() {
+		history.add(0, gameboard);
 		updateDisplay();
 	}
 
 	/*
 	 * helper function written to rotate the buffer board so one function can be used for
 	 * moving tiles (moveDown) and then the board can be rotated back
-	 * 
+	 *
 	 * THIS HAS ISSUES do not pass any number more than one for times
 	 */
 	static int[][] rotateBoard(int times, int[][] board) {
@@ -156,10 +212,12 @@ public class Engine {
 	}
 
 	//helper function for sliding and merging the tiles down
-	private int[][] moveDown(int[][] board) throws Exception {
+	private int[][] moveRight(int[][] board) throws Exception {
 		boolean valid = false;
 
 		for (int row = 0; row < 4; row++) {
+
+			//first merge tiles
 			for (int col = 0; col < 4; col++) {
 				for (int b = col + 1; b < 4; b++) {
 					//TODO feel like explaining this in comments
@@ -173,19 +231,38 @@ public class Engine {
 						setScore(nblock * 2);
 
 						valid = true;
+						break;
 
-					} else if (block == 0 && nblock != 0) {
+					} else if (nblock != 0) {
+						break;
+
+					} else {
+						continue;
+					}
+				}
+			}
+
+			// now move down
+			for (int col = 0; col < 4; col++) {
+				for (int b = col + 1; b < 4; b++) {
+					//TODO feel like explaining this in comments
+					final int block = board[row][col];
+					final int nblock = board[row][b];
+
+					if (block == 0 && nblock != 0) {
 						board[row][col] = nblock;
 						board[row][b] = 0;
 
 						valid = true;
-					} else if (nblock != 0) {
 						break;
+
+					} else if (block != 0) {
+						break;
+
 					} else {
 						continue;
 					}
 
-					break;
 				}
 			}
 		}
