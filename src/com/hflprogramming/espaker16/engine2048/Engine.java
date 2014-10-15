@@ -159,12 +159,10 @@ public class Engine {
 
 		//check for end of game
 		if (emptyCells.size() < 2) {
-			System.out.println("game may be over");
 			if (isGameOver(gameboard)) {
 				onGameOver();
 				return -1;
 			}
-			System.out.println("but its not");
 
 		}
 
