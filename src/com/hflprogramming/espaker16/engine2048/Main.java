@@ -33,19 +33,19 @@ public class Main {
 				switch (key.getKind()) {
 
 				case ArrowLeft:
-					engine.swipe(engine.D_LEFT);
+					engine.swipe(Engine.D_LEFT);
 					break;
 
 				case ArrowRight:
-					engine.swipe(engine.D_RIGHT);
+					engine.swipe(Engine.D_RIGHT);
 					break;
 
 				case ArrowUp:
-					engine.swipe(engine.D_UP);
+					engine.swipe(Engine.D_UP);
 					break;
 
 				case ArrowDown:
-					engine.swipe(engine.D_DOWN);
+					engine.swipe(Engine.D_DOWN);
 					break;
 
 				case PageUp:
@@ -85,7 +85,8 @@ public class Main {
 					System.out.println("direction worked next turn");
 
 					try {
-						Thread.currentThread().sleep(80);//sleep for 1000 ms
+						Thread.currentThread();
+						Thread.sleep(80);//sleep for 1000 ms
 					} catch (final InterruptedException e) {
 						e.printStackTrace();
 					}
