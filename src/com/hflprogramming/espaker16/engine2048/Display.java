@@ -1,5 +1,6 @@
 package com.hflprogramming.espaker16.engine2048;
 
+import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.screen.ScreenCharacter;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.hflprogramming.espaker16.view.Blueprints;
@@ -31,6 +32,10 @@ public class Display {
 
 	public void refresh() {
 		view.refresh();
+	}
+
+	public Key readKeyInput() {
+		return view.terminal.readInput();
 	}
 
 }
@@ -69,8 +74,8 @@ class DisplayTile extends Structure {
 	DisplayTile(int x, int y, int posX, int posY) {
 		super(x, y, posX, posY);
 
-		//create boarder
-		Blueprints.drawBorder(this, '|', '|', '_', '\u203E');//\u203E is an overline character
+		//create boarder-never mind borders are for losers
+		//Blueprints.drawBorder(this, '|', '|', '_', '\u203E');//\u203E is an overline character
 
 		draw();
 	}
@@ -99,6 +104,7 @@ class DisplayTile extends Structure {
 
 			} else {
 				write((width - 2 - length) / 2 + 1, (height - 2) / 2 + 1, numericString);
+
 			}
 		}
 

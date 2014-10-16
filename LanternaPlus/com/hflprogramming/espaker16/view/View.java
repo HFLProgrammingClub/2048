@@ -23,11 +23,7 @@ public class View {
 
 	public View() {
 
-		terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
-		terminal.setCursorVisible(false);
-
-		width = terminal.getTerminalSize().getColumns();
-		height = terminal.getTerminalSize().getRows();
+		initTerminal();
 
 		screen = new Screen(terminal);
 
@@ -39,6 +35,26 @@ public class View {
 		screen.refresh();
 
 		writer = new ScreenWriter(screen);
+	}
+
+	public void initTerminal() {
+		try {
+			terminal = TerminalFacade.createTextTerminal(System.in, System.out, Charset.forName("UTF8"));
+
+			terminal.setCursorVisible(false);
+
+			width = terminal.getTerminalSize().getColumns();
+			height = terminal.getTerminalSize().getRows();
+
+		} catch (final Exception e) {
+			terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
+
+			terminal.setCursorVisible(false);
+
+			width = terminal.getTerminalSize().getColumns();
+			height = terminal.getTerminalSize().getRows();
+		}
+
 	}
 
 	public void test() {

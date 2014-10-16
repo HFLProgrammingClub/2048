@@ -5,10 +5,20 @@ import java.util.List;
 import java.util.Random;
 
 public class Engine {
-	int[][] gameboard;
-	public Display display;
+	private boolean doDisplay = true;
+	private Display display;
 
-	//for testing
+	private int[][] gameboard;
+
+	private int score;
+
+	public static final byte D_LEFT = 2;
+	public static final byte D_DOWN = 0;
+	public static final byte D_UP = 1;
+	public static final byte D_RIGHT = 3;
+
+	//TODO fix undo code
+	/*
 	public List<int[][]> history = new ArrayList<int[][]>();
 	public int current = 0;
 
@@ -25,58 +35,52 @@ public class Engine {
 	}
 
 	void undo() {
-		current += 1;
-		if (current < 0) {
-			current = 0;
-		}
-		if (current >= history.size()) {
-			current = history.size() - 1;
-		}
-		gameboard = history.get(current);
-		updateDisplay();
+		loadDisplay(current+1);
 	}
 
 	void redo() {
-		current -= 1;
-		if (current < 0) {
-			current = 0;
-		}
-		if (current >= history.size()) {
-			current = history.size() - 1;
-		}
-		gameboard = history.get(current);
-		updateDisplay();
+		loadDisplay(current-1);
 	}
 
+	void reset() {
+		if (current != 0) {
+			for (int i = 0; i < current; i++) {
+				history.remove(i);
+				current = 0;
+			}
+		}
+		history.add(0, gameboard);
+	}
+	 */
 	public Engine() {
 		gameboard = new int[4][4];//rows then columns, 0,0 at bottom left corner
+		for (int col = 0; col < 4; col++) {
+			for (int row = 0; row < 4; row++) {
+				gameboard[row][col] = 0;
+			}
+		}
+	}
+
+	public void startGame(boolean debug) {
+		final Random random = new Random();
+		final int cell = random.nextInt(16);//Get a random integer between 0(inclusive) and the 16(exclusive)
+		gameboard[cell % 4][cell / 4] = random.nextInt(10) < 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
+
+		if (doDisplay) {
+			updateDisplay();
+		}
+	}
+
+	public int getScore() {
+		return this.score;
 	}
 
 	public int[][] look() {
 		return gameboard;
 	}
 
-	public int score;
-
-	public static final byte D_LEFT = 2;
-	public static final byte D_DOWN = 0;
-	public static final byte D_UP = 1;
-	public static final byte D_RIGHT = 3;
-
-	public void startGame() {
-		final Random random = new Random();
-		final int cell = random.nextInt(16);//Get a random integer between 0(inclusive) and the 16(exclusive)
-		gameboard[cell % 4][cell / 4] = random.nextInt(10) < 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
-	}
-
 	//0:invalid, 1:valid, -1:game-over
 	public int swipe(byte direction) {
-		if (current != 0) {
-			for (int i = 0; i < current; i++) {
-				history.remove(i);
-			}
-		}
-
 		switch (direction) {
 		case D_RIGHT:
 			//two rotations
@@ -172,15 +176,22 @@ public class Engine {
 	}
 
 	private void onGameOver() {
-		System.out.println("game over");
-		history.add(0, gameboard);
-		updateDisplay();
+		System.out.println("Game Over");
+		if (doDisplay) {
+			updateDisplay();
+		}
 
 	}
 
 	private void onMove() {
-		history.add(0, gameboard);
-		updateDisplay();
+		if (doDisplay) {
+			updateDisplay();
+		}
+	}
+
+	// 'newTileValue' is supposed to be set to the numerical value of the new tile created.
+	private void setScore(int newTileValue) {
+		this.score += newTileValue;
 	}
 
 	/*
@@ -189,7 +200,7 @@ public class Engine {
 	 *
 	 * THIS HAS ISSUES do not pass any number more than one for times
 	 */
-	static int[][] rotateBoard(int times, int[][] board) {
+	private static int[][] rotateBoard(int times, int[][] board) {
 		//TODO fix multible rotations funtionality
 		final int[][] buffer = new int[4][4];//rows then columns, 0,0 at bottom left corner
 		//will rotate board right "times" times
@@ -293,15 +304,6 @@ public class Engine {
 		return true;
 	}
 
-	// 'newTileValue' is supposed to be set to the numerical value of the new tile created.
-	public void setScore(int newTileValue) {
-		this.score += newTileValue;
-	}
-
-	public int getScore() {
-		return this.score;
-	}
-
 	public void updateDisplay() {
 		if (display != null) {
 			for (int i = 0; i < 16; i++) {
@@ -312,5 +314,24 @@ public class Engine {
 		}
 
 		display.refresh();
+	}
+
+	public void initDisplay() {
+		display = new Display();
+		updateDisplay();
+		doDisplay = true;
+
+	}
+
+	public void closeDisplay() {
+		if (display != null) {
+			display.view.screen.stopScreen();
+			display = null;
+		}
+		doDisplay = false;
+	}
+
+	public Display getDisplay() {
+		return display;
 	}
 }

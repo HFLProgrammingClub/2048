@@ -11,12 +11,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		engine = new Engine();
-		engine.display = new Display();
 
-		engine.startGame();
+		engine.initDisplay();
+		engine.startGame(false);
 
 		testPlay();
 
+		//an example of an extremly simple 2048 bot
 		try {
 			gameloop();
 		} catch (final Exception e) {
@@ -25,10 +26,10 @@ public class Main {
 
 	}
 
+	//test code for human players playing in the terminal with arrow keys
 	public static void testPlay() {
-		//final test code for final playing manually (final with numbers entered final into console)
 		while (true) {
-			final Key key = engine.display.view.terminal.readInput();
+			final Key key = engine.getDisplay().readKeyInput();
 			if (key != null) {
 				switch (key.getKind()) {
 
@@ -48,16 +49,19 @@ public class Main {
 					engine.swipe(Engine.D_DOWN);
 					break;
 
+				/*
 				case PageUp:
-					engine.undo();
-					break;
+				engine.undo();
+				break;
 
 				case PageDown:
-					engine.redo();
-					break;
+				engine.redo();
+				break;
+
+				 */
 
 				case Escape:
-					engine.display.view.screen.stopScreen();
+					engine.closeDisplay();
 					System.exit(0);
 					break;
 
@@ -65,10 +69,10 @@ public class Main {
 					break;
 				}
 			}
-
 		}
 	}
 
+	//an example of an extremly simple 2048 bot
 	public static void gameloop() throws Exception {
 		final byte[] directionPriority = { Engine.D_DOWN, Engine.D_LEFT, Engine.D_RIGHT, Engine.D_UP };
 
@@ -93,11 +97,11 @@ public class Main {
 					break;
 
 				} else if (status == 0) {
-					System.out.println("direction failed");
+					System.out.println("direction failed try another");
 					continue;
 
 				} else {
-					System.out.println("direction worked game over");
+					System.out.println("game over");
 					throw new Exception();
 				}
 			}
