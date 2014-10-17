@@ -38,23 +38,12 @@ public class View {
 	}
 
 	public void initTerminal() {
-		try {
-			terminal = TerminalFacade.createTextTerminal(System.in, System.out, Charset.forName("UTF8"));
+		terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
 
-			terminal.setCursorVisible(false);
+		terminal.setCursorVisible(false);
 
-			width = terminal.getTerminalSize().getColumns();
-			height = terminal.getTerminalSize().getRows();
-
-		} catch (final Exception e) {
-			terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
-
-			terminal.setCursorVisible(false);
-
-			width = terminal.getTerminalSize().getColumns();
-			height = terminal.getTerminalSize().getRows();
-		}
-
+		width = terminal.getTerminalSize().getColumns();
+		height = terminal.getTerminalSize().getRows();
 	}
 
 	public void test() {
