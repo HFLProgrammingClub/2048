@@ -28,7 +28,7 @@ public class Engine {
 
 	public void startGame(boolean debug) {
 		final Random random = new Random();
-		final int cell = random.nextInt(16);//Get a random integer between 0(inclusive) and the 16(exclusive)
+		int cell = random.nextInt(16);//Get a random integer between 0(inclusive) and the 16(exclusive)
 		gameboard[cell % 4][cell / 4] = random.nextInt(10) < 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two.
 
 		final List<Integer> emptyCells = new ArrayList<>(0);
@@ -39,13 +39,10 @@ public class Engine {
 			}
 		}
 
-		final Random random = new Random();
-		final int cell = emptyCells.get(random.nextInt(emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
+		cell = emptyCells.get(random.nextInt(emptyCells.size()));//Get a random integer between 0(inclusive) and the number of empty cells(exclusive).
 		gameboard[cell % 4][cell / 4] = random.nextInt(10) < 9 ? 2 : 4;//Place new tile. There is a one out of ten chance that the tile will be a four instead of a two
-		
-		if (doDisplay) {
-			updateDisplay();
-		}
+
+		onMove();
 	}
 
 	public int getScore() {
@@ -128,9 +125,9 @@ public class Engine {
 		//get all empty tiles (there will be at least one)
 		final List<Integer> emptyCells = new ArrayList<>(0);
 
-		for (int i = 0; i < 16; i++) {
-			if (gameboard[i % 4][i / 4] == 0) {
-				emptyCells.add(i);
+		for (int iteration = 0; iteration < 16; iteration++) {
+			if (gameboard[iteration % 4][iteration / 4] == 0) {
+				emptyCells.add(iteration);
 			}
 		}
 
@@ -154,10 +151,7 @@ public class Engine {
 
 	private void onGameOver() {
 		System.out.println("Game Over");
-		if (doDisplay) {
-			updateDisplay();
-		}
-
+		onMove();
 	}
 
 	private void onMove() {
@@ -178,7 +172,7 @@ public class Engine {
 	 * THIS HAS ISSUES do not pass any number more than one for times
 	 */
 	private static int[][] rotateBoard(int times, int[][] board) {
-		//TODO fix multible rotations funtionality
+		//TODO fix multiple rotations functionality
 		final int[][] buffer = new int[4][4];//rows then columns, 0,0 at bottom left corner
 		//will rotate board right "times" times
 
@@ -257,7 +251,7 @@ public class Engine {
 			return board;
 
 		} else {
-			//throw to signify an invalid board move (aka: nothing moves)
+			//throw to signify an invalid board move (AKA: nothing moves)
 			throw new Exception();
 		}
 	}
@@ -283,9 +277,9 @@ public class Engine {
 
 	public void updateDisplay() {
 		if (display != null) {
-			for (int i = 0; i < 16; i++) {
-				final int x = i / 4;
-				final int y = i % 4;
+			for (int iteration = 0; iteration < 16; iteration++) {
+				final int x = iteration / 4;
+				final int y = iteration % 4;
 				display.setTile(x, y, gameboard[y][x]);
 			}
 		}

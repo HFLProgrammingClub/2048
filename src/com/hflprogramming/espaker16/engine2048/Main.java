@@ -17,7 +17,7 @@ public class Main {
 
 		testPlay();
 
-		//an example of an extremly simple 2048 bot
+		//an example of an extremely simple 2048 bot
 		try {
 			gameloop();
 		} catch (final Exception e) {
@@ -49,7 +49,7 @@ public class Main {
 					engine.swipe(Engine.D_DOWN);
 					break;
 
-				/*
+					/*
 				case PageUp:
 				engine.undo();
 				break;
@@ -58,7 +58,7 @@ public class Main {
 				engine.redo();
 				break;
 
-				 */
+					 */
 
 				case Escape:
 					engine.closeDisplay();
@@ -72,7 +72,7 @@ public class Main {
 		}
 	}
 
-	//an example of an extremly simple 2048 bot
+	//an example of an extremely simple 2048 bot
 	public static void gameloop() throws Exception {
 		final byte[] directionPriority = { Engine.D_DOWN, Engine.D_LEFT, Engine.D_RIGHT, Engine.D_UP };
 
@@ -90,7 +90,7 @@ public class Main {
 
 					try {
 						Thread.currentThread();
-						Thread.sleep(80);//sleep for 1000 ms
+						Thread.sleep(80);//sleep for 80 ms
 					} catch (final InterruptedException e) {
 						e.printStackTrace();
 					}
