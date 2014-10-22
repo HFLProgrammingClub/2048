@@ -54,9 +54,9 @@ class DisplayBoard extends Structure {
 		final int tileWidth = internalView.width / 4;
 		final int tileHeight = internalView.height / 4;
 
-		for (int i = 0; i < 16; i++) {
-			final int x = i / 4;
-			final int y = i % 4;
+		for (int iteration = 0; iteration < 16; iteration++) {
+			final int x = iteration / 4;
+			final int y = iteration % 4;
 
 			internalView.subpanes.add(new DisplayTile(tileWidth - 1, tileHeight, tileWidth * x + x, tileHeight * y));
 		}

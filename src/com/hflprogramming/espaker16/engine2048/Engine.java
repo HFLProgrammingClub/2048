@@ -255,9 +255,9 @@ public class Engine {
 	private static List<Integer> getEmptyCells(int[][] board) {
 		final List<Integer> emptyCells = new ArrayList<>(0);
 
-		for (int i = 0; i < 16; i++) {
-			if (board[i % 4][i / 4] == 0) {
-				emptyCells.add(i);
+		for (int iteration = 0; iteration < 16; iteration++) {
+			if (board[iteration % 4][iteration / 4] == 0) {
+				emptyCells.add(iteration);
 			}
 		}
 		return emptyCells;
