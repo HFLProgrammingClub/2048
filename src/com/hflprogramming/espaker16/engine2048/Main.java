@@ -49,7 +49,7 @@ public class Main {
 					engine.swipe(Engine.D_DOWN);
 					break;
 
-					/*
+				/*
 				case PageUp:
 				engine.undo();
 				break;
@@ -58,7 +58,7 @@ public class Main {
 				engine.redo();
 				break;
 
-					 */
+				 */
 
 				case Escape:
 					engine.closeDisplay();
