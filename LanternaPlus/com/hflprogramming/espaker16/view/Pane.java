@@ -43,12 +43,12 @@ public class Pane {
 		int posX;
 		int posY;
 
-		for (int i = 0; i < chars.length; i++) {
-			posY = y + i / width;
-			posX = x + i % width;
+		for (int iteration = 0; iteration < chars.length; iteration++) {
+			posY = y + iteration / width;
+			posX = x + iteration % width;
 
 			if (posX < width && posY < height) {
-				buffer[posX][posY] = new ScreenCharacter(chars[i]);
+				buffer[posX][posY] = new ScreenCharacter(chars[iteration]);
 			}
 
 		}
@@ -59,65 +59,65 @@ public class Pane {
 
 		switch (direction) {
 		case "up":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x][y - i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x][y - iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "down":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x][y + i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x][y + iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "left":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "right":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "up-right":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y - i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y - iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "down-right":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y + i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y + iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "up-left":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y - i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y - iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
 
 		case "down-left":
-			for (int i = 0; i < chars.length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y + i] = new ScreenCharacter(chars[i]);
+			for (int iteration = 0; iteration < chars.length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y + iteration] = new ScreenCharacter(chars[iteration]);
 				}
 			}
 			break;
@@ -190,65 +190,65 @@ public class Pane {
 	public void vectorLine(int x, int y, int length, String direction, ScreenCharacter character) {
 		switch (direction) {
 		case "up":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x][y - i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x][y - iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "down":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x][y + i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x][y + iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "left":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "right":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "up-right":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y - i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y - iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "down-right":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x + i][y + i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x + iteration][y + iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "up-left":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y - i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y - iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
 
 		case "down-left":
-			for (int i = 0; i < length; i++) {
-				if (x + i < width && y < height && x + i >= 0 && y >= 0) {
-					buffer[x - i][y + i] = new ScreenCharacter(character);
+			for (int iteration = 0; iteration < length; iteration++) {
+				if (x + iteration < width && y < height && x + iteration >= 0 && y >= 0) {
+					buffer[x - iteration][y + iteration] = new ScreenCharacter(character);
 				}
 			}
 			break;
@@ -307,8 +307,8 @@ public class Pane {
 	}
 
 	public void refresh() {
-		for (int i = 0; i < subpanes.size(); i++) {
-			final Pane pane = subpanes.get(i);
+		for (int iteration = 0; iteration < subpanes.size(); iteration++) {
+			final Pane pane = subpanes.get(iteration);
 			pane.refresh();
 
 			for (int x = 0; x < pane.width; x++) {

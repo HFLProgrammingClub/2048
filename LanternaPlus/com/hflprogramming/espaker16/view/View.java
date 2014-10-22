@@ -59,8 +59,8 @@ public class View {
 	}
 
 	public void refresh() {
-		for (int i = 0; i < panes.size(); i++) {
-			final Pane pane = panes.get(i);
+		for (int iteration = 0; iteration < panes.size(); iteration++) {
+			final Pane pane = panes.get(iteration);
 			pane.refresh();
 
 			//need to fix issue with small panes (index out of range)
