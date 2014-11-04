@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.googlecode.lanterna.input.Key;
 
+//this file is not part of the engine but rather am example implementation along with some test code
 public class Main {
 
 	static Engine engine;
