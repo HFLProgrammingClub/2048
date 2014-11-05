@@ -1,0 +1,1 @@
+A [2048](https://gabrielecirulli.github.io/2048/) engine, written in [Java](https://en.wikipedia.org/wiki/Java_\(programming_language\)) with the [Lanterna](https://code.google.com/p/lanterna/) library, for use in the HF-L Programming Club 2048 AI competition.
