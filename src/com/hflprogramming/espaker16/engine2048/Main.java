@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.googlecode.lanterna.input.Key;
 
+//this file is not part of the engine but rather am example implementation along with some test code
 public class Main {
 
 	static Engine engine;
@@ -92,6 +93,7 @@ public class Main {
 					try {
 						Thread.currentThread();
 						Thread.sleep(7);//sleep for 80 ms
+
 					} catch (final InterruptedException e) {
 						e.printStackTrace();
 					}

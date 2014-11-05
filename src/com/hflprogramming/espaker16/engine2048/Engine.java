@@ -19,6 +19,7 @@ public class Engine {
 
 	public Engine() {
 		gameboard = new int[4][4];
+
 		for (int col = 0; col < 4; col++) {
 			for (int row = 0; row < 4; row++) {
 				gameboard[row][col] = 0;
@@ -141,6 +142,7 @@ public class Engine {
 	private void onGameOver() {
 		System.out.println("Game Over");
 		System.out.println("Score: " + this.score);
+
 		onMove();
 	}
 
